@@ -1,3 +1,4 @@
+import { EmpresasService } from './../../services/empresas.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -19,11 +20,15 @@ export class ColaboradoresComponent implements OnInit {
   edadEditado: string ='';
   telefonoEditado: string ='';
   correoEditado: string ='';
+  empresas: any[] = [];
 
-  constructor(private colaboradoresService : ColaboradoresService) {}
+  constructor(private colaboradoresService : ColaboradoresService,private empresasService: EmpresasService) {}
 
   ngOnInit(): void {
     this.loadColaboradores();
+    this.empresasService.getAEmpresas().subscribe((empresas) => {
+      this.empresas = empresas;
+    });
   }
 
   loadColaboradores() {

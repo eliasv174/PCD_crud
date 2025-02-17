@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc, getDocs } from '@angular/fire/firestore';
+import { from, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresasService {
   constructor(private firestore: Firestore) {}
+
+  getAEmpresas(): Observable<any[]> {
+      const empresasRef = collection(this.firestore, 'empresas');
+      return from(getDocs(empresasRef)).pipe(
+        map((querySnapshot) => {
+          return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        })
+      );
+    }
 
   getEmpresas() {
     const empresasRef = collection(this.firestore, 'empresas');

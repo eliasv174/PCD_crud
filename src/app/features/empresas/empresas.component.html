@@ -2,6 +2,33 @@
   <h2 class="text-2xl font-bold mb-6">Agregar Empresa</h2>
   <form (ngSubmit)="addEmpresa(correoElectronico.value, departamento.value, municipio.value, nit.value, nombreComercial.value, pais.value, razonSocial.value, telefono.value)" class="space-y-4">
 
+<!-- Actualiza los select con las funciones de cambio -->
+<div>
+  <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
+  <select id="pais" #pais (change)="onPaisChange(pais.value)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+    <option value="" disabled selected class="placeholder-option">Seleccione el Pais</option>
+    <option *ngFor="let pais of paises" [value]="pais.id">{{ pais.nombre }}</option>
+  </select>
+</div>
+
+<div>
+  <label for="departamento" class="block text-sm font-medium text-gray-700">Departamento</label>
+  <select id="departamento" #departamento (change)="onDepartamentoChange(departamento.value)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+    <option value="" disabled selected class="placeholder-option">Seleccione el Departamento</option>
+    <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{ departamento.nombre }}</option>
+  </select>
+</div>
+
+<div>
+  <label for="municipio" class="block text-sm font-medium text-gray-700">Municipio</label>
+  <select id="municipio" #municipio (change)="onMunicipioChange(municipio.value)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+    <option value="" disabled selected class="placeholder-option">Seleccione el Municipio</option>
+    <option *ngFor="let municipio of municipios" [value]="municipio.id">{{ municipio.nombre }}</option>
+  </select>
+</div>
+
+
+
     <!-- Campo Correo Electrónico -->
     <div>
       <label for="correoElectronico" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
@@ -13,29 +40,7 @@
         required
       />
     </div>
-    <!-- Campo Departamento -->
-    <div>
-      <label for="departamento" class="block text-sm font-medium text-gray-700">Departamento</label>
-      <input
-        type="text"
-        #departamento
-        id="departamento"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        required
-      />
-    </div>
-    <!-- Campo Municipio -->
-    <div>
-      <label for="municipio" class="block text-sm font-medium text-gray-700">Municipio</label>
-      <input
-        type="text"
-        #municipio
-        id="municipio"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        required
-      />
-    </div>
-    <!-- Campo NIT -->
+
     <div>
       <label for="nit" class="block text-sm font-medium text-gray-700">NIT</label>
       <input
@@ -46,7 +51,6 @@
         required
       />
     </div>
-    <!-- Campo Nombre Comercial -->
     <div>
       <label for="nombreComercial" class="block text-sm font-medium text-gray-700">Nombre Comercial</label>
       <input
@@ -57,18 +61,7 @@
         required
       />
     </div>
-    <!-- Campo País -->
-    <div>
-      <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
-      <input
-        type="text"
-        #pais
-        id="pais"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        required
-      />
-    </div>
-    <!-- Campo Razón Social -->
+
     <div>
       <label for="razonSocial" class="block text-sm font-medium text-gray-700">Razón Social</label>
       <input
@@ -79,7 +72,7 @@
         required
       />
     </div>
-    <!-- Campo Teléfono -->
+
     <div>
       <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
       <input
@@ -90,7 +83,7 @@
         required
       />
     </div>
-    <!-- Botón de Agregar -->
+
     <button
       type="submit"
       class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -99,7 +92,7 @@
     </button>
   </form>
 </div>
-
+<!------mitabla-->
 <div class="mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
   <h2 class="text-2xl font-bold mb-6">Lista de Empresas</h2>
   <table class="min-w-full divide-y divide-gray-200">

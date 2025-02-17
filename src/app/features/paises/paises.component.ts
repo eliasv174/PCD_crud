@@ -15,7 +15,7 @@ export class PaisesComponent implements OnInit {
   paises: any[] = [];
   paisEditando: any = null; // Variable para almacenar el país que se está editando
   nombreEditado: string = '';
-  codEditado: string = '';
+  idEditado: string = '';
 
   constructor(private paisesService: PaisesService) {}
 
@@ -47,8 +47,8 @@ export class PaisesComponent implements OnInit {
     });
   }
 
-  addPais(nombre: string, cod:string) {
-    this.paisesService.addPais({ nombre,cod }).then(() => {
+  addPais(nombre: string, id:string) {
+    this.paisesService.addPais({ nombre,id }).then(() => {
       this.loadPaises(); // Recargar la lista después de agregar
     });
   }
@@ -61,12 +61,12 @@ export class PaisesComponent implements OnInit {
   editarPais(pais: any) {
     this.paisEditando = pais; // Almacena el país que se está editando
     this.nombreEditado = pais.nombre;
-    this.codEditado = pais.cod; // Inicializa el nombre editado con el valor actual
+    this.idEditado = pais.id; // Inicializa el nombre editado con el valor actual
   }
 
   guardarEdicion() {
     if (this.paisEditando) {
-      const paisActualizado = { ...this.paisEditando, nombre: this.nombreEditado,cod: this.codEditado };
+      const paisActualizado = { ...this.paisEditando, nombre: this.nombreEditado,id: this.idEditado };
       this.paisesService.updatePais(this.paisEditando.id, paisActualizado).then(() => {
         this.loadPaises(); // Recarga la lista después de editar
         this.paisEditando = null; // Limpia la variable de edición

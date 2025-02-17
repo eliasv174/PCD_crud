@@ -30,27 +30,23 @@ export class MunicipiosService {
 
 import { Injectable } from '@angular/core';
 import { Firestore, collection, query, where, getDocs, doc, deleteDoc, updateDoc, addDoc,collectionData } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs'; // Importa 'from' de 'rxjs'
+import { Observable, from } from 'rxjs';
 import { DocumentData } from 'firebase/firestore';
-import { map } from 'rxjs/operators';  // map para transformar la respuesta
+import { map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MunicipiosService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore
+  ) {}
 
-  // Obtener municipios por departamento
   getMunicipios(departamentoId: string): Observable<any[]> {
     const municipiosRef = collection(this.firestore, 'municipios');
-    const q = query(municipiosRef, where("departamentoId", "==", departamentoId));
-
-    return from(getDocs(q)).pipe(
-      map((querySnapshot) => {
-        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      })
-    );
+    const q = query(municipiosRef, where('departamentoId', '==', departamentoId));
+    return collectionData(q, { idField: 'id' });
   }
 
   // Agregar un nuevo municipio

@@ -40,20 +40,13 @@ import { map } from 'rxjs/operators';  // map para transformar la respuesta
 export class DepartamentosService {
   constructor(private firestore: Firestore) {}
 
-  // Modificar este método para devolver un Observable
-  getDepartamentos(paisId: string): Observable<DocumentData[]> {
+
+
+
+  getDepartamentos(paisId: string): Observable<any[]> {
     const departamentosRef = collection(this.firestore, 'departamentos');
-
-    // Filtrar los departamentos por paisId
-    const q = query(departamentosRef, where("paisId", "==", paisId));
-
-    // Convertir el Promise a Observable con 'from'
-    return from(getDocs(q)).pipe(
-      // Extraer los datos de la consulta
-      map((querySnapshot) => {
-        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      })
-    );
+    const q = query(departamentosRef, where('paisId', '==', paisId));
+    return collectionData(q, { idField: 'id' });
   }
 
   addDepartamento(departamento: any) {

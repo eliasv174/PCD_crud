@@ -26,9 +26,12 @@ export class PaisesService {
   updatePais(id: string, pais: any) {
     const paisDocRef = doc(this.firestore, `paises/${id}`);
     return updateDoc(paisDocRef, pais);
+
   }
+
+
   getPaises(): Observable<any[]> {
-    const paisesRef = collection(this.firestore, 'paises'); // Asegúrate de que 'paises' sea el nombre correcto de tu colección
+    const paisesRef = collection(this.firestore, 'paises');
     return from(getDocs(paisesRef)).pipe(
       map((querySnapshot) => {
         return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));

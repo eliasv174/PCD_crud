@@ -4,5 +4,6 @@
 @tailwind utilities;
 
 body{
-  background: #15151a;  /* fallback for old browsers */
+  background: #1a1a2c;  /* fallback for old browsers */
 }
+

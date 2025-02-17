@@ -1,17 +1,12 @@
 <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
   <h2 class="text-2xl font-bold mb-6">Agregar Colaborador</h2>
-  <form (ngSubmit)="addColaborador( empresa.value, nombres.value , apellidos.value, edad.value, telefono.value,correoElectronico.value)" class="space-y-4">
+  <form (ngSubmit)="addColaborador(empresa.value,nombres.value, apellidos.value, edad.value, telefono.value, correoElectronico.value)" class="space-y-4">
+<div>
 
-
-    <div>
       <label for="empresa" class="block text-sm font-medium text-gray-700">Empresas</label>
-      <input
-        type="email"
-        #empresa
-        id="empresa"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        required
-      />
+      <select id="empresa" #empresa class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+        <option *ngFor="let empresa of empresas" [value]="empresa.nombreComercial">{{ empresa.nombreComercial }}</option>
+      </select>
     </div>
 
     <div>
