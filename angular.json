@@ -87,10 +87,17 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+
+              "node_modules/flowbite/dist/flowbite.js"
+
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2b36db6f-a489-49ff-ad7b-eb75ce9daefa"
   }
 }

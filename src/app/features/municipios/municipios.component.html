@@ -1,0 +1,150 @@
+<!--<div class="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Agregar Municipio</h2>
+  <form (ngSubmit)="addMunicipio(nombre.value)" class="space-y-4">
+    <div>
+      <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del Municipio</label>
+      <input
+        type="text"
+        #nombre
+        id="nombre"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+    <button
+      type="submit"
+      class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    >
+      Agregar
+    </button>
+  </form>
+</div>
+
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Lista de Municipios</h2>
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let municipio of municipios">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+
+
+           <div *ngIf="municipioEditando && municipioEditando.id === municipio.id; else mostrarNombre">
+            <input
+              [(ngModel)]="nombreEditado"
+              class="px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+            <button
+              (click)="guardarEdicion()"
+              class="ml-2 px-2 py-1 bg-green-600 text-white rounded-md hover:bg-green-700"
+            >
+              Guardar
+            </button>
+            <button
+              (click)="cancelarEdicion()"
+              class="ml-2 px-2 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+            >
+              Cancelar
+            </button>
+          </div>
+
+
+          <ng-template #mostrarNombre>
+            {{ municipio.nombre }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+
+          <button
+            (click)="editarMunicipio(municipio)"
+            class="text-indigo-600 hover:text-indigo-900 mr-4"
+          >
+            Editar
+          </button>
+
+          <button
+            (click)="deleteMunicipio(municipio.id)"
+            class="text-red-600 hover:text-red-900"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>-->
+
+<div class="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Agregar Municipio</h2>
+  <form (ngSubmit)="addMunicipio()" class="space-y-4">
+    <div class="mb-4">
+      <label for="pais" class="block text-gray-700">Selecciona un País:</label>
+      <select id="pais" (change)="onPaisChange($event)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="" disabled selected>Elige un país</option>
+        <option *ngFor="let pais of paises" [value]="pais.id">{{ pais.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="departamento" class="block text-gray-700">Selecciona un Departamento:</label>
+      <select id="departamento" [(ngModel)]="departamentoIdSeleccionado" (change)="onDepartamentoChange(departamentoIdSeleccionado)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" name="departamento">
+        <option value="" disabled selected>Elige un departamento</option>
+        <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{ departamento.nombre }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="departamentoIdSeleccionado" class="mb-4">
+      <label for="nombre" class="block text-gray-700">Nuevo Municipio:</label>
+      <input
+        id="nombre"
+        [(ngModel)]="nombreMunicipio"
+        name="nombreMunicipio"
+        placeholder="Nombre del Municipio"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+      <div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Lista de Municipios</h2>
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let municipio of municipios">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="municipioEditando && municipioEditando.id === municipio.id; else mostrarNombre">
+            <input
+              [(ngModel)]="nombreEditado"
+              name="nombreEditadoEdicion"
+              class="px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+            <button (click)="guardarEdicion()" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Guardar</button>
+            <button (click)="cancelarEdicion()" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2">Cancelar</button>
+          </div>
+          <ng-template #mostrarNombre>
+            {{ municipio.nombre }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <button (click)="editarMunicipio(municipio)" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Editar</button>
+          <button (click)="deleteMunicipio(municipio.id)" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

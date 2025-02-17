@@ -1,0 +1,203 @@
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Agregar Colaborador</h2>
+  <form (ngSubmit)="addColaborador( empresa.value, nombres.value , apellidos.value, edad.value, telefono.value,correoElectronico.value)" class="space-y-4">
+
+
+    <div>
+      <label for="empresa" class="block text-sm font-medium text-gray-700">Empresas</label>
+      <input
+        type="email"
+        #empresa
+        id="empresa"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+      <input
+        type="text"
+        #nombres
+        id="nombres"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+      <input
+        type="text"
+        #apellidos
+        id="apellidos"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
+      <input
+        type="number"
+        #edad
+        id="edad"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="telefono" class="block text-sm font-medium text-gray-700">Telefono</label>
+      <input
+        type="number"
+        #telefono
+        id="telefono"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="correoElectronico" class="block text-sm font-medium text-gray-700">Correo Electronico</label>
+      <input
+        type="email"
+        #correoElectronico
+        id="correoElectronico"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        required
+      />
+    </div>
+
+    <!-- Botón de Agregar -->
+    <button
+      type="submit"
+      class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    >
+      Agregar
+    </button>
+  </form>
+</div>
+
+<div class="mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-6">Listado de Colaboradores</h2>
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresas</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombres</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apellidos</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edad</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo Electrónico</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let colaborador of colaboradores">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarEmpresa">
+            <input
+              [(ngModel)]="empresaEditado"
+              class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Empresas"
+            />
+          </div>
+          <ng-template #mostrarEmpresa>
+            {{ colaborador.empresa }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarNombres">
+            <input
+              [(ngModel)]="nombresEditado"
+              class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Nombres"
+            />
+          </div>
+          <ng-template #mostrarNombres>
+            {{ colaborador.nombres }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarApellidos">
+            <input
+              [(ngModel)]="apellidosEditado"
+              class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Apellidos"
+            />
+          </div>
+          <ng-template #mostrarApellidos>
+            {{ colaborador.apellidos }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarEdad">
+            <input
+              [(ngModel)]="edadEditado"
+              type="number"
+              class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Edad"
+            />
+          </div>
+          <ng-template #mostrarEdad>
+            {{ colaborador.edad }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarTelefono">
+            <input
+              [(ngModel)]=telefonoEditado class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Teléfono"
+            />
+          </div>
+          <ng-template #mostrarTelefono>
+            {{ colaborador.telefono }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarCorreo">
+            <input
+              [(ngModel)]="correoEditado"
+              class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Correo Electrónico"
+            />
+          </div>
+          <ng-template #mostrarCorreo>
+            {{ colaborador.correoElectronico }}
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <ng-container *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarAcciones">
+            <button
+              (click)="guardarEdicion()"
+              class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Guardar
+            </button>
+            <button
+              (click)="cancelarEdicion()"
+              class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              Cancelar
+            </button>
+          </ng-container>
+          <ng-template #mostrarAcciones>
+            <button
+              (click)="editarColaborador(colaborador)"
+              class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Editar
+            </button>
+            <button
+              (click)="deleteColaborador(colaborador.id)"
+              class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Eliminar
+            </button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
