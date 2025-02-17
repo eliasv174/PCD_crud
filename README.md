@@ -1,59 +1,38 @@
 # PcdPrueba
+# Proyecto de Registro de Empresas y Colaboradores
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+## Descripción
 
-## Development server
+Este proyecto es una aplicación web desarrollada en **Angular 19** que permite el registro de **empresas** y **colaboradores**. Los usuarios pueden agregar, editar y eliminar datos de empresas y colaboradores a través de un formulario interactivo. Además, la aplicación se conecta a una base de datos **Firebase** para el almacenamiento de los registros.
 
-To start a local development server, run:
+## Desarrollado por
 
-```bash
-ng serve
-```
+**Eddy Elias Villatoro Gómez**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tecnologías y Metodologías Usadas
 
-## Code scaffolding
+### Tecnologías:
+- **Angular 19**: Framework de desarrollo para la construcción de aplicaciones web modernas, basado en TypeScript.
+- **Firebase**: Plataforma que proporciona servicios backend como base de datos en tiempo real, autenticación y almacenamiento para aplicaciones web.
+- **Tailwind CSS**: Framework de diseño de utilidad que permite una personalización rápida y sencilla de la interfaz de usuario.
+- **Flowbite**: Biblioteca de componentes UI que se integra con Tailwind CSS para facilitar la creación de interfaces visualmente atractivas y funcionales.
+- **TypeScript**: Lenguaje de programación que extiende JavaScript con tipado estático y herramientas para desarrollar aplicaciones más robustas y escalables.
+- **Firestore**: Base de datos NoSQL de Firebase utilizada para almacenar los registros de empresas y colaboradores.
+  
+### Metodologías:
+- **CRUD (Crear, Leer, Actualizar, Eliminar)**: Funcionalidades básicas implementadas para gestionar empresas y colaboradores en la base de datos.
+  
+## Características del Proyecto
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Registro de Empresas**: Permite agregar, editar y eliminar empresas, guardando datos relevantes como nombre, correo electrónico, número de teléfono, país, departamento, municipio y más.
+- **Registro de Colaboradores**: Permite registrar colaboradores para cada empresa con detalles como nombre, cargo y contacto.
+- **Interfaz de Usuario Intuitiva**: Usando Tailwind CSS y Flowbite, el diseño es limpio, responsive y fácil de navegar.
+- **Conexión con Firebase**: Los datos se guardan y recuperan de Firebase Firestore en tiempo real, garantizando una experiencia fluida para el usuario.
 
-```bash
-ng generate component component-name
-```
+## Instalación
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 1. Clonar el repositorio
 
 ```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+git clone https://github.com/eliasv174/PCD_crud.git
+cd pcd-prueba
