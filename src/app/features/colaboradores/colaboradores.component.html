@@ -1,12 +1,16 @@
 <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
   <h2 class="text-2xl font-bold mb-6">Agregar Colaborador</h2>
-  <form (ngSubmit)="addColaborador(empresa.value,nombres.value, apellidos.value, edad.value, telefono.value, correoElectronico.value)" class="space-y-4">
-<div>
-
+  <form (ngSubmit)="addColaborador(empresa, nombres.value, apellidos.value, edad.value, telefono.value, correoElectronico.value)" class="space-y-4">
+    <div>
       <label for="empresa" class="block text-sm font-medium text-gray-700">Empresas</label>
-      <select id="empresa" #empresa class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
-        <option *ngFor="let empresa of empresas" [value]="empresa.nombreComercial">{{ empresa.nombreComercial }}</option>
-      </select>
+      <div class="space-y-2">
+        <div *ngFor="let empresa of empresas">
+          <label class="inline-flex items-center">
+            <input type="checkbox" [(ngModel)]="empresa.selected" name="empresa" class="form-checkbox h-4 w-4 text-indigo-600" (change)="onEmpresaChange()" />
+            <span class="ml-2 text-sm text-gray-700">{{ empresa.nombreComercial }}</span>
+          </label>
+        </div>
+      </div>
     </div>
 
     <div>
@@ -90,7 +94,24 @@
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
       <tr *ngFor="let colaborador of colaboradores">
+
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+          <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarEmpresas">
+            <select [(ngModel)]="empresaEditado" name="empresa" multiple
+                    class="w-full max-w-xs px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+              <option *ngFor="let empresa of empresas" [ngValue]="empresa"
+                      [selected]="isEmpresaSeleccionada(empresa)">
+                {{ empresa.nombreComercial }}
+              </option>
+            </select>
+          </div>
+          <ng-template #mostrarEmpresas>
+            <span *ngFor="let empresa of colaborador.empresa">{{ empresa.razonSocial }}, </span>
+          </ng-template>
+        </td>
+
+
+      <!--  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
           <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarEmpresa">
             <input
               [(ngModel)]="empresaEditado"
@@ -101,7 +122,8 @@
           <ng-template #mostrarEmpresa>
             {{ colaborador.empresa }}
           </ng-template>
-        </td>
+        </td>-->
+
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
           <div *ngIf="colaboradorEditando && colaboradorEditando.id === colaborador.id; else mostrarNombres">
             <input
